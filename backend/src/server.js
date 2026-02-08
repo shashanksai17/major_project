@@ -18,9 +18,9 @@ app.get("/books",(req,res)=>{
 // make our app for deployment
 
 
-if(ENV.NODE_URL==="production"){
+if(ENV.NODE_ENV==="production"){
     app.use(express.static(path.join(_dirname,"../frontend/vite-project/dist")));
-    app.get("*",(req,res)=>{
+    app.get("/{*any}",(req,res)=>{
         res.sendFile(path.join(_dirname,"../frontend/vite-project","dist","index.html"));
     })
 }
