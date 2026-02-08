@@ -20,7 +20,7 @@ app.get("/books",(req,res)=>{
 
 if(ENV.NODE_URL==="production"){
     app.use(express.static(path.join(_dirname,"../frontend/vite-project/dist")));
-    app.get("/{*any}",(req,res)=>{
+    app.get("*",(req,res)=>{
         res.sendFile(path.join(_dirname,"../frontend/vite-project","dist","index.html"));
     })
 }
