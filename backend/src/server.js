@@ -1,7 +1,7 @@
 import express from  "express";
 import {ENV} from  "./lib/env.js";
 import path from "path";
-
+import {connectDB} from "./lib/db.js";
 const app=express();
 
 
@@ -26,7 +26,20 @@ if(ENV.NODE_URL==="production"){
 }
 
 
-app.listen(ENV.PORT,()=>{
-    console.log(`server is running on port ${ENV.PORT}`);
-})
 
+
+
+const startServer=async()=>{
+    try{
+        await connectDB();
+      app.listen(ENV.PORT,()=>{
+    console.log(`server is running on port ${ENV.PORT}`);
+        })
+
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+startServer();
