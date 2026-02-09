@@ -5,7 +5,7 @@ import {connectDB} from "./lib/db.js";
 const app=express();
 
 
-const _dirname=path.resolve();
+const __dirname=path.resolve();
 
 app.get("/health",(req,res)=>{
     res.status(200).json({msg:"success from backend"});
@@ -19,9 +19,9 @@ app.get("/books",(req,res)=>{
 
 
 if(ENV.NODE_ENV==="production"){
-    app.use(express.static(path.join(_dirname,"../frontend/vite-project/dist")));
+    app.use(express.static(path.join(__dirname,"../frontend/vite-project/dist")));
     app.get("/{*any}",(req,res)=>{
-        res.sendFile(path.join(_dirname,"../frontend/vite-project","dist","index.html"));
+        res.sendFile(path.join(__dirname,"../frontend/vite-project","dist","index.html"));
     })
 }
 
