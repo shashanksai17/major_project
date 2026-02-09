@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix frontend/vite-project && npm install --prefix backend && npm run build --prefix frontend/vite-project",
-    "start":"npm run start --prefix backend"
+    "start":"npm run dev --prefix frontend/vite-project && npm run start --prefix backend"
   },
   "repository": {
     "type": "git",
