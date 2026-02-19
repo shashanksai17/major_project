@@ -1,8 +1,19 @@
 import { Code2, Clock, Users, Trophy, Loader } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, isValid } from "date-fns";
 
 function RecentSessions({ sessions, isLoading }) {
+  const formatRelativeTime = (dateString) => {
+    if (!dateString) return "Unknown time";
+    const date = new Date(dateString);
+    return isValid(date) ? formatDistanceToNow(date, { addSuffix: true }) : "Unknown time";
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "-";
+    const date = new Date(dateString);
+    return isValid(date) ? date.toLocaleDateString() : "-";
+  };
   return (
     <div className="card bg-base-100 border-2 border-accent/20 hover:border-accent/30 mt-8">
       <div className="card-body">
@@ -61,11 +72,7 @@ function RecentSessions({ sessions, isLoading }) {
                   <div className="space-y-2 text-sm opacity-80 mb-4">
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4" />
-                      <span>
-                        {formatDistanceToNow(new Date(session.createdAt), {
-                          addSuffix: true,
-                        })}
-                      </span>
+                      <span>{formatRelativeTime(session.createdAt)}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4" />
@@ -79,7 +86,7 @@ function RecentSessions({ sessions, isLoading }) {
                   <div className="flex items-center justify-between pt-3 border-t border-base-300">
                     <span className="text-xs font-semibold opacity-80 uppercase">Completed</span>
                     <span className="text-xs opacity-40">
-                      {new Date(session.updatedAt).toLocaleDateString()}
+                      {formatDate(session.updatedAt)}
                     </span>
                   </div>
                 </div>
