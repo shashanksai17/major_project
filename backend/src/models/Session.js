@@ -28,8 +28,7 @@ const sessionSchema=new mongoose.Schema({
         type:String,
         default:"",
     },
-
-})
+}, { timestamps: true })
 
 const Session=mongoose.model("session",sessionSchema)
 
